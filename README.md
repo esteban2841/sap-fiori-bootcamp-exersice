@@ -41,4 +41,7 @@ An SAP Fiori application.
 
 
 # sap-fiori-bootcamp-exersice
-# sap-fiori-bootcamp-exersice
+
+# Table exercise made
+
+Binding model as JSONModel in the recipient['products'] in Home controller as "Products" this model contains the product info from the oData generated from Northwind api db and instanced on Home controller but throught the helper init Fn Fn and rendered in a basic Table controller accessed as /Products in the Home View
