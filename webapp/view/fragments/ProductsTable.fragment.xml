@@ -1,0 +1,28 @@
+<c:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+        <Table id="idProductsTable" items="{
+            path: 'LocalDataModel>/products'
+        }">
+            <columns>
+                <Column  header="ID">
+                    <Text text="ID"></Text>
+                </Column>
+                <Column  header="Product Name">
+                    <Text text="Product Name"></Text>
+                </Column>
+                <Column  header="Unit Price">
+                    <Text text="Unit Price"></Text>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Active" press="onItemPressRedirect">
+                    <Text text="{LocalDataModel>ProductID}"/>
+                    <Text text="{LocalDataModel>ProductName}"/>
+                    <Text text="{LocalDataModel>UnitPrice}"/>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+</c:FragmentDefinition >

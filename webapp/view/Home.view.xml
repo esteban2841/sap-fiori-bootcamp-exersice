@@ -1,26 +1,42 @@
 <mvc:View controllerName="com.bootcamp.sapui5.testproject.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
     xmlns:core="sap.ui.core"
-    xmlns="sap.m">
+>
     <Page id="page" title="{i18n>title}">
-        <VBox id="124" >
-            <Button id="412" text="{i18n>consultar}" press="onPress"></Button>
-            <Text text="Hi, my name is Esteban" id="5124" ></Text>
+                <VBox id="vTest">
+            <Text
+                id="textPrueba"
+                text="{i18n>textPruebai18n}"
+            />
+            <Toolbar id="toolbarID">
+                <Input id="inputID" change="onChange" value="{LocalDataModel>/valueInput}"/>
+                <Button
+                    id="btnBuscar"
+                    text="{i18n>textBuscar}"
+                    press="onPress"
+                />            
+                <ComboBox
+                    id="comboboxID"
+                    selectionChange="onSelectionChange"
+                    selectedKey="{LocalDataModel>/selectedKey}"
+                    items="{
+                        path: '/Categories',
+                        sorter: { path: 'CategoryName' }
+                    }">
+                    <core:Item key="{CategoryID}" text="{CategoryID} {CategoryName}" />                                     
+                </ComboBox>                
+            </Toolbar>
+
         </VBox>
-        <Table items="{/Products}">
-            <columns>
-                <Column header="ID" />
-                <Column header="Name"/>
-                <Column header="Status"/>
-            </columns>
-            <items>
-                <ColumnListItem>
-                    <Text text="{ProductID}"/>
-                    <Text text="{ProductName}"/>
-                    <Text text="{UnitPrice}"/>
-                </ColumnListItem>
-            </items>
-        </Table>
+        <VBox id="1245" >
+            <c:Fragment 
+                fragmentName="com.bootcamp.sapui5.testproject.view.fragments.ProductsTable"
+                type="XML"
+            ></c:Fragment>
+        </VBox>
         
+
     </Page>
 </mvc:View>
