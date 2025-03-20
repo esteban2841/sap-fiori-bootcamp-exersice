@@ -10,7 +10,7 @@
                 id="textPrueba"
                 text="{i18n>textPruebai18n}"
             />
-            <Toolbar id="toolbarID">
+            <!-- <Toolbar id="toolbarID">
                 <Input id="inputID" change="onChange" value="{LocalDataModel>/valueInput}"/>
                 <Button
                     id="btnBuscar"
@@ -27,6 +27,23 @@
                     }">
                     <core:Item key="{CategoryID}" text="{CategoryID} {CategoryName}" />                                     
                 </ComboBox>                
+            </Toolbar> -->
+            <Toolbar >
+                <Input change="onChange" value="{LocalDataModel>/valueInput}"/>
+                <Button
+                    text="{i18n>textBuscar}"
+                    press="onPress"
+                />            
+                <MultiComboBox
+                    selectionChange="onSelectionChange"
+                    selectionFinish="onFinishChange"
+                    selectedKeys="{LocalDataModel>/multiFilter}"
+                    items="{
+                        path: '/Categories',
+                        sorter: { path: 'CategoryName' }
+                    }">
+                    <core:Item key="{CategoryID}" text="{CategoryID} {CategoryName}" />                                     
+                </MultiComboBox>                
             </Toolbar>
 
         </VBox>

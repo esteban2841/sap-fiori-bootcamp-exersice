@@ -37,16 +37,16 @@ sap.ui.define([
                 //oFilter.push(new Filter("CategoryID", FilterOperator.EQ, sValueCombo));
                 oFilter.push(new Filter("CategoryID", FilterOperator.EQ, values.selectedKey));
             }
-
+            
             let oDatos = await HomeHelper.getDataProducts(oFilter);
-
+            
             let CurrentState = this.getOwnerComponent().getModel('LocalDataModel').getData()
-
+            
             CurrentState.products = oDatos[0].results
             
             await HomeHelper.setProductModel(this, CurrentState, "LocalDataModel");
         },
-
+        
         onItemPressRedirect: function(oEvent){
             let oSource = oEvent.getSource();
             console.log(oSource, 'sourcer')
@@ -56,19 +56,35 @@ sap.ui.define([
                 ProductID: oDatos.ProductID
             });
         },
-
+        
         onSelectionChange: async function (oEvent) {
-
-            // let oFilter = [];
-            // let oSource = oEvent.getSource();
-            // let oTable = this.getView().byId("idProductsTable")
-            // let oBinding = oTable.getBinding("items");
-
-            // if(oSource.getSelectedKey()){
-            //     oFilter = new Filter("CategoryID", FilterOperator.EQ, oSource.getSelectedKey());               
-            // } 
-            // oBinding.filter(oFilter);               
-
+            const filters = []
+            const model = this.getOwnerComponent().getModel("LocalDataModel").getData()
+            if (model.multiFilter.length) {
+                //oFilter.push(new Filter("CategoryID", FilterOperator.EQ, sValueCombo));
+                model.multiFilter.forEach(categoryId=>{
+                    filters.push(new Filter("CategoryID", FilterOperator.EQ, categoryId));
+                })
+            }
+            const data = await HomeHelper.getDataProducts(filters)
+            console.log(data, 'multiinput on selection FILTERED DATA')
+            model.products = data[0].results
+            await HomeHelper.setProductModel(this, model, "LocalDataModel");
+            
+        },
+        onFinishChange: async function (oEvent) {
+            const filters = []
+            const model = this.getOwnerComponent().getModel("LocalDataModel").getData()
+            if (model.multiFilter.length) {
+                //oFilter.push(new Filter("CategoryID", FilterOperator.EQ, sValueCombo));
+                model.multiFilter.forEach(categoryId=>{
+                    filters.push(new Filter("CategoryID", FilterOperator.EQ, categoryId));
+                })
+            }
+            const data = await HomeHelper.getDataProducts(filters)
+            console.log(data, 'multiinput on selection FILTERED DATA END')
+            model.products = data[0].results
+            await HomeHelper.setProductModel(this, model, "LocalDataModel");
         },
 
         onChange: async function (oEvent){
